@@ -31,7 +31,6 @@ export default {
             let { socket } = e.detail;
             this.play();
 
-            console.log("yes :)")
         });
 
         

@@ -76,7 +76,11 @@ class _Server {
     });
 
     socket.on('close', function() {
-      self.readStream.end();
+      try {
+        self.readStream.end(); 
+      } catch (error) {
+        
+      }
       console.log('stopping client interval');
     });
   }

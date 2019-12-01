@@ -11,7 +11,7 @@ class RpiServer extends Server {
 
   constructor(server, opts) {
     super(server, merge({
-      fps : 20,
+      fps : 12,
     }, opts));
   }
 
@@ -20,9 +20,13 @@ class RpiServer extends Server {
     var cmd = util.format(msk, this.options.width, this.options.height, this.options.fps);
     console.log(cmd);
     var streamer = spawn('raspivid', ['-t', '0', '-o', '-', '-w', this.options.width, '-h', this.options.height, '-fps', this.options.fps, '-pf', 'baseline']);
-    streamer.on("exit", function(code){
+    streamer.on("exit", function(code) {
       console.log("Failure", code);
     });
+    streamer.on("error", function(err) {
+      console.log('Oh noez, teh errurz: ' + err);
+    });
+    
 
     return streamer.stdout;
   }

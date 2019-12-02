@@ -11,7 +11,6 @@ const express = require('express');
 
 
 const WebStreamerServer = require('./lib/raspivid');
-
 const app  = express();
 
   //public website

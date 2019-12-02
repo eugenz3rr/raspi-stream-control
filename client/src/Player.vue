@@ -14,8 +14,8 @@ export default {
     data: () => {
         return {
             Helper,
-            uri: "ws://127.0.0.1:8081",
-            _uri: "ws://192.168.0.164:8080",
+            _uri: "ws://127.0.0.1:8081",
+            uri: "ws://192.168.0.164:8081",
             wsavc: null,
             ratio: {
                 x: 0,

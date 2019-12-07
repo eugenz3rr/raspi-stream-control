@@ -1,15 +1,11 @@
 {
-  "name": "h264-live-stream-demo-server",
-  "private": true,
+  "name": "raspi-stream-control",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
   "scripts": {
-    "install": "cd vendor && npm install",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "install": "cd vendor && npm install"
   },
-  "author": "",
+  "author": "Eugen Zerr",
   "license": "ISC",
   "dependencies": {
     "express": "^3.21.2",

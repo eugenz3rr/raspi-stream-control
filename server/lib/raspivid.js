@@ -16,11 +16,23 @@ class RpiServer extends Server {
   }
 
   get_feed() {
+
+    // Kill all children before (currently only one client at the time supported.).
     this.killChildren();
+    
+    // Define command mask.
     var msk = "raspivid -t 0 -o - -w %d -h %d -fps %d";
+    
+    // Apply data to mask.
     var cmd = util.format(msk, this.options.width, this.options.height, this.options.fps);
+    
+    // Display command.
     console.log(cmd);
+
+    // Spawn/execute command.
     var streamer = spawn('raspivid', ['-t', '0', '-o', '-', '-w', this.options.width, '-h', this.options.height, '-fps', this.options.fps, '-pf', 'baseline']);
+    
+    // Listen to unexpected fails. 
     streamer.on("exit", function(code) {
       console.log("Failure", code);
       streamer
@@ -28,8 +40,11 @@ class RpiServer extends Server {
     streamer.on("error", function(err) {
       console.log('Oh noez, teh errurz: ' + err);
     });
+
+    // Update childs.
     childs.push(streamer);
 
+    // Return stream
     return streamer.stdout;
   }
 
@@ -41,7 +56,5 @@ class RpiServer extends Server {
  }
 
 };
-
-
 
 module.exports = RpiServer;

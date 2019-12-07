@@ -4,7 +4,6 @@
 const WebSocketServer = require('ws').Server;
 const Splitter = require('stream-split');
 const merge = require('mout/object/merge');
-const niceTry = require('nice-try');
 
 const NALseparator    = new Buffer([0,0,0,1]);//NAL break
 
@@ -27,7 +26,6 @@ class _Server {
     this.wss.on('connection', this.new_client);
   }
   
-
   start_feed() {
     var readStream = this.get_feed();
     this.readStream = readStream;
@@ -41,7 +39,6 @@ class _Server {
 
     readStream.on("error", function (code) {
       console.log(`_server.js error code = ${code}`);
-
     });
   }
 
@@ -80,8 +77,6 @@ class _Server {
       console.log("Incomming action '%s'", action);
 
       if (action == "STOPSTREAM" || (action == "REQUESTSTREAM" && !!self.streamer)) {
-        // self.streamer.kill('SIGKILL');
-        self.streamer.kill();
         self.readStream = undefined;
         console.log("previous streamer killed");
       }
@@ -92,13 +87,10 @@ class _Server {
     });
 
     socket.on('close', function() {
-      //self.readStream.end();
       console.log('web-socket closed');
     });
   }
 
-
 };
-
 
 module.exports = _Server;

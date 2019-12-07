@@ -10,12 +10,11 @@ const http    = require('http');
 const express = require('express');
 
 
-const WebStreamerServer = require('./lib/raspivid');
+const WebStreamerServer = require('./server/lib/raspivid');
 const app  = express();
 
   //public website
-app.use(express.static(__dirname + '/public'));
-app.use(express.static(__dirname + '/vendor/dist'));
+app.use(express.static(__dirname + '/client'));
 
 const server  = http.createServer(app);
 const silence = new WebStreamerServer(server);

@@ -1,34 +1,13 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Vuetify from "vuetify/dist/vuetify.min";
+import VueSocketIOExt from 'vue-socket.io-extended';
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:8081');
 
 Vue.use(Vuetify);
-
-export let Helper = new Vue({
-  name: 'Helper',
-  data: {
-    fullscreen: false
-  },
-  methods: {
-
-    // Calculate ratio by given width.
-    screenRatio: function ( ratioX, ratioY, x) {
-      return {
-        x,
-        y: x / ratioX * ratioY, 
-      }
-    },
-  }
-});
-
-
-gameControl.on('connect', gamepad => {
-  console.log('A new gamepad was connected!');
-
-  gamepad.on('up0', (value) => {
-    
-  });
-});
+Vue.use(VueSocketIOExt, socket);
 
 new Vue({
   el: '#app',
@@ -49,3 +28,22 @@ new Vue({
   }),
   render: h => h(App)
 })
+
+
+export let Helper = new Vue({
+  name: 'Helper',
+  data: {
+    fullscreen: false,
+    socket: null
+  },
+  methods: {
+
+    // Calculate ratio by given width.
+    screenRatio: function ( ratioX, ratioY, x) {
+      return {
+        x,
+        y: x / ratioX * ratioY, 
+      }
+    },
+  },
+});

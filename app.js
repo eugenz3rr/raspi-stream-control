@@ -1,22 +1,18 @@
 "use strict";
 
-/**
-* Run this on a raspberry pi 
-* then browse (using google chrome/firefox) to http://[pi ip]:8080/
-*/
-
-
-const http    = require('http');
+const http = require('http');
 const express = require('express');
-
-
-const WebStreamerServer = require('./server/lib/raspivid');
+//const WebStreamerServer = require('./server/lib/raspivid');
 const app  = express();
-
-  //public website
 app.use(express.static(__dirname + '/client'));
 
 const server  = http.createServer(app);
-const silence = new WebStreamerServer(server);
+//const silence = new WebStreamerServer(server);
+
+const io = require('socket.io')(server);
+
+// Handles the socket.io requests.
+let socketListener = require('./socket-listener');
+socketListener = new socketListener(io);
 
 server.listen(8081);

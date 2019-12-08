@@ -23,6 +23,10 @@
   "homepage": "https://github.com/eugenz3rr/raspi-stream-control#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "http": "0.0.0"
+    "http": "0.0.0",
+    "serialport": "^8.0.5",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
+    "vue-socket.io-extended": "^4.0.1"
   }
 }
